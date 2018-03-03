@@ -1,0 +1,27 @@
+{
+  "name": "digi-dalek",
+  "version": "0.0.1",
+  "description": "Digi Dalek Website",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "debug": "^2.6.0",
+    "express": "^4.16.2"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
