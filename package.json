@@ -1,35 +1,27 @@
 {
-  "name": "DigiDalek-ciscospark-bot",
+  "name": "digi-dalek",
   "version": "0.0.1",
-  "description": "A custom Cisco Spark bot with Botkit Studio",
+  "description": "Digi Dalek Website",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "botkit": "^0.6.9",
-    "botkit-studio-metrics": "^0.0.1",
     "debug": "^2.6.0",
-    "express": "^4.14.0",
-    "node-env-file": "^0.1.8",
-    "request": "^2.79.0",
-    "wordfilter": "^0.2.6"
+    "express": "^4.16.2"
   },
-  "devDependencies": {},
+  "engines": {
+    "node": "8.x"
+  },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/howdyai/botkit-starter-ciscospark.git"
+    "url": ""
   },
-  "bugs": {
-    "url": "https://github.com/howdyai/botkit-starter-ciscospark/issues"
-  },
-  "homepage": "https://github.com/howdyai/botkit-starter-ciscospark",
+  "author": "",
+  "license": "MIT",
   "keywords": [
-    "bots",
-    "chatbots",
-    "Cisco Spark"
-  ],
-  "author": "ben@howdy.ai",
-  "license": "ISC"
+    "node",
+    "glitch",
+    "express"
+  ]
 }
