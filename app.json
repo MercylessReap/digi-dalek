@@ -1,9 +1,9 @@
 {
-  "name": "Botkit Starter Kit",
-  "description": "A starting point for building custom Cisco Spark applications",
-  "repository": "https://github.com/howdyai/botkit-starter-ciscospark",
-  "keywords": ["node", "bots", "cisco spark","botkit"],
-  "website": "https://studio.botkit.ai/",
+  "name": "Digi Dalek",
+  "description": "Digi Dalek is a custom Cisco Spark assistance bot, built using botkit from howdyai (https://github.com/howdyai/botkit-starter-ciscospark)",
+  "repository": "https://github.com/MercylessReap/digi-dalek",
+  "keywords": ["node", "bots", "cisco spark","botkit","Digi Dalek", "Dimensional Data"],
+  "website": "https://digi-dalek.glitch.me/",
   "success_url":"/",
   "env": {
       "access_token": {
