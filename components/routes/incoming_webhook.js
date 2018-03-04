@@ -1,5 +1,4 @@
-module.exports = {
-  Country: function () {
+
     switch(country)
   {
       case "United Kingdom":
@@ -26,5 +25,4 @@ module.exports = {
       default:
         webhookReply = "switch";
   }
-}
-}
+
