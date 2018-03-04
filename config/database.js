@@ -12,13 +12,11 @@ con.connect(function(err) {
   console.log("Connected!");
 });
 
-/*
-con.query('SELECT * FROM test WHERE id = :id AND name = :name',
-        { id: 1337, name: 'Frylock' },
-        function(err, rows) {
-  if (err)
-    throw err;
-  console.dir(rows);
+
+con.query('SELECT * FROM Europe ',
+  function(err, rows) {
+    if (err)
+      throw err;
+    console.log(rows);
 });
 
-*/

@@ -19,9 +19,11 @@ webserver.get('/api/v1/webhook', function (req, res) {
 })
 
 webserver.get('/admin', function (req, res) {
-  res.sendFile(__dirname + '/private/index.html');
+  res.sendFile(global.__rootdir + '/private/index.html');
 })
-
+webserver.get('/login', function (req, res) {
+  res.sendFile(global.__rootdir + '/private/login.html');
+})
 webserver.post('/api/v1/webhook', function (req, res) {
   // we expect to receive JSON data from api.ai here.
   // the payload is stored on req.body
@@ -49,8 +51,33 @@ webserver.post('/api/v1/webhook', function (req, res) {
   var country = req.body.result.parameters['Country'];
   var webhookReply
   
-  var routes = require(__dirname + '/components/routes/incoming_webhook.js');
-  routes.country
+ 
+    switch(country)
+  {
+      case "United Kingdom":
+        webhookReply = 'Dimension Data has eight offices in the UK. There are 2 offices located in Cheshire and London, there is also an office in Glasgow, Hampshire (Head Office), Lichfield and Milton. To get more detailed information about their locations please click on this link: https://www2.dimensiondata.com/en/locations/united-kingdom'
+        break;
+      case "Switzerland":
+        webhookReply = "Dimension Data has two offices in Switzerland. The offices are located in Lausanne and Wallisellen. To get more detailed information about their locations please click on this link: https://www2.dimensiondata.com/en/locations/switzerland";
+        break;
+      case "Spain":
+        webhookReply = "";
+        break;
+      case "Spain":
+        webhookReply = "";
+        break;
+      case "Spain":
+        webhookReply = "";
+        break;
+      case "Spain":
+        webhookReply = "";
+        break;
+      case "Spain":
+        webhookReply = "";
+        break;
+      default:
+        webhookReply = "switch";
+  }
 
 
 
