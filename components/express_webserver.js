@@ -7,7 +7,6 @@ const webserver = express();
 const REQUIRE_AUTH = true
 const access_token = process.env.access_token
 
-
 webserver.use(bodyParser.json());
 webserver.use(bodyParser.urlencoded({ extended: true }));
 webserver.use(express.static('public'));
@@ -18,9 +17,11 @@ webserver.listen(process.env.PORT || 3000, null, function() {
 webserver.get('/api/v1/webhook', function (req, res) {
   res.send('You must POST your request')
 })
+
 webserver.get('/admin', function (req, res) {
   res.sendFile(__dirname + '/private/index.html');
 })
+
 webserver.post('/api/v1/webhook', function (req, res) {
   // we expect to receive JSON data from api.ai here.
   // the payload is stored on req.body
@@ -28,7 +29,9 @@ webserver.post('/api/v1/webhook', function (req, res) {
 
   // we have a simple authentication
   if (REQUIRE_AUTH) {
+
     if (req.headers['auth-token'] !== access_token) {
+
       return res.status(401).send('Unauthorized')
     }
   }
@@ -48,9 +51,8 @@ webserver.post('/api/v1/webhook', function (req, res) {
   
   var routes = require(__dirname + '/components/routes/incoming_webhook.js');
   routes.country
-  
-  
-  //var webhookReply = 'Hello ' + userName + '! Welcome from the webhook.'
+
+
 
   // the most basic response
   res.status(200).json({
