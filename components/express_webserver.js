@@ -1,12 +1,12 @@
+
 // init project
 const express = require('express');
 const bodyParser = require('body-parser');
 const webserver = express();
 //Require Authentication
 const REQUIRE_AUTH = true
-const AUTH_TOKEN = 'an-example-token'
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+const access_token = process.env.access_token
+
 
 webserver.use(bodyParser.json());
 webserver.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +18,9 @@ webserver.listen(process.env.PORT || 3000, null, function() {
 webserver.get('/api/v1/webhook', function (req, res) {
   res.send('You must POST your request')
 })
-
+webserver.get('/admin', function (req, res) {
+  res.sendFile(__dirname + '/private/index.html');
+})
 webserver.post('/api/v1/webhook', function (req, res) {
   // we expect to receive JSON data from api.ai here.
   // the payload is stored on req.body
@@ -26,7 +28,7 @@ webserver.post('/api/v1/webhook', function (req, res) {
 
   // we have a simple authentication
   if (REQUIRE_AUTH) {
-    if (req.headers['auth-token'] !== AUTH_TOKEN) {
+    if (req.headers['auth-token'] !== access_token) {
       return res.status(401).send('Unauthorized')
     }
   }
@@ -38,9 +40,17 @@ webserver.post('/api/v1/webhook', function (req, res) {
   // the value of Action from api.ai is stored in req.body.result.action
   console.log('* Received action -- %s', req.body.result.action)
 
+  
   // parameters are stored in req.body.result.parameters
-  var userName = req.body.result.parameters['resolvedQuery']
-  var webhookReply = 'Hello ' + userName + '! Welcome from the webhook.'
+  var request = req.body.result;
+  var country = req.body.result.parameters['Country'];
+  var webhookReply
+  
+  var routes = require(__dirname + '/components/routes/incoming_webhook.js');
+  routes.country
+  
+  
+  //var webhookReply = 'Hello ' + userName + '! Welcome from the webhook.'
 
   // the most basic response
   res.status(200).json({
