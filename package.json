@@ -1,35 +1,31 @@
 {
   "name": "digi-dalek",
   "version": "0.0.1",
-  "description": "Digi Dalek Website",
+  "description": "Digi Dalek Website, webhook and admin",
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "debug": "^2.6.0",
     "express": "^4.16.2",
-    "bootstrap": "^4.0.0",
-    "node-env-file": "^0.1.8",
+    "popper.js": "^1.13.0",
     "mariasql": "^0.2.6",
     "jquery": "^3.3.1",
-    "popper.js": "^1.13.0"
+    "body-parser": "^1.18.2",
+    "node-env-file": "^0.1.8",
+    "bootstrap": "^4.0.0",
+    "debug": "^3.1.0"
   },
   "engines": {
     "node": "8.x"
   },
   "repository": {
-    "url": ""
+    "url": "https://github.com/MercylessReap/digi-dalek.git"
   },
-  "author": "",
   "license": "MIT",
   "keywords": [
     "node",
     "glitch",
-    "express"
-  ]
-}glitch",
     "express"
   ]
 }
