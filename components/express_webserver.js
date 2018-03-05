@@ -46,39 +46,103 @@ webserver.post('/api/v1/webhook', function (req, res) {
   console.log('* Received action -- %s', req.body.result.action)
 
   
-  // parameters are stored in req.body.result.parameters
+// parameters are stored in req.body.result.parameters
   var request = req.body.result;
+  var requestIntent = req.body.result.metadata['intentName'];
   var country = req.body.result.parameters['Country'];
+  var keyword = req.body.result.parameters['keyword'];
+  var city = req.body.result.parameters['geo-city'];
   var webhookReply
-  
- 
-    switch(country)
-  {
-      case "United Kingdom":
-        webhookReply = 'Dimension Data has eight offices in the UK. There are 2 offices located in Cheshire and London, there is also an office in Glasgow, Hampshire (Head Office), Lichfield and Milton. To get more detailed information about their locations please click on this link: https://www2.dimensiondata.com/en/locations/united-kingdom'
-        break;
-      case "Switzerland":
-        webhookReply = "Dimension Data has two offices in Switzerland. The offices are located in Lausanne and Wallisellen. To get more detailed information about their locations please click on this link: https://www2.dimensiondata.com/en/locations/switzerland";
-        break;
-      case "Spain":
-        webhookReply = "";
-        break;
-      case "Spain":
-        webhookReply = "";
-        break;
-      case "Spain":
-        webhookReply = "";
-        break;
-      case "Spain":
-        webhookReply = "";
-        break;
-      case "Spain":
-        webhookReply = "";
-        break;
-      default:
-        webhookReply = "switch";
-  }
+  //Process webhook based on intent name
+  console.log(requestIntent)
 
+
+  switch(requestIntent)
+  {
+      case "support-number" || "support-number - country":
+     con.query('SELECT * FROM Europe WHERE country = ?',[country], function(err, rows) {
+        if (err)
+          throw err;
+        console.dir(rows);
+        
+        for(var item of rows) {
+          console.log('item: ', [item.id]);
+          var queryNumber = [item.phone_number] ;
+          console.log(queryNumber);
+        }
+        
+        if (country == 'United Kingdom' || country == 'Ireland' ){
+          webhookReply = 'Your IT support number is: ' + queryNumber + " Why don\'t you try raising a ticket directly via ITSM?";
+        }else{
+          webhookReply = 'Your IT support number is: ' + queryNumber;
+        }
+         // the most basic response
+        res.status(200).json({
+          source: 'webhook',
+          speech: webhookReply,
+          displayText: webhookReply
+        })
+      });
+
+        break;
+      
+      case "offices":
+      
+      con.query('SELECT * FROM Europe WHERE country = ?',[country], function(err, rows) {
+        if (err)
+          throw err;
+        console.dir(rows);
+        
+        for(var item of rows) {
+          console.log('item: ', [item.id]);
+          var queryOffices = [item.offices] ;
+          var queryofficeAmount = [item.office_amount] ; 
+        }
+        if(country == null){
+             webhookReply = "No Country specified ";
+           }else if(queryOffices == null){
+             webhookReply = "No offices found for "+country;
+           }else{
+             webhookReply = "Dimension Data has "+queryofficeAmount+" offices in the "+country+". The "+queryofficeAmount+" offices are located in "+queryOffices+". To get more detailed information about their location please click on this link: https://www2.dimensiondata.com/en/locations/"+country;
+           }
+        console.log(webhookReply);
+        // the most basic response
+        res.status(200).json({
+          source: 'webhook',
+          speech: webhookReply,
+          displayText: webhookReply
+        })
+      });
+      
+        break;
+      
+      case "General":
+      
+        con.query('SELECT * FROM general WHERE keyword = ?',[keyword], function(err, rows) {
+          if (err)
+            throw err;
+            console.dir(rows);
+        
+        for(var item of rows) {
+          console.log('item: ', [item.id]);
+          var queryInfo = [item.info];
+          //console.log(queryInfo);
+        }
+        //queryInfo = [item.keyword] ;
+          webhookReply =  " info: "+queryInfo;
+          
+        // the most basic response
+        res.status(200).json({
+          source: 'webhook',
+          speech: webhookReply,
+          displayText: webhookReply
+        })
+      
+        })
+        
+        break;
+  }
+  
 
 
   // the most basic response
